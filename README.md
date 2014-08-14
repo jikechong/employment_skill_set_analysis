@@ -6,6 +6,7 @@ White House Job JAM focus project for skill set analysis, providing an API for s
 Please find the data file under:
 - data/job_sample_1000.txt
 - data/resume_samples_10000.csv
+- data/resume_raw/*
 
 Sample access code can be found at:
 - code/simplyhired_approach/data_access_sample.py
