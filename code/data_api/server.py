@@ -2,6 +2,8 @@ import os
 import json
 import string
 from bottle import route, run, request, abort
+from urllib2 import urlopen
+import socket
 
 import process_request
 pr = process_request.process_request()
@@ -28,12 +30,12 @@ if __name__ == '__main__':
 
     # Local Version
     # -------------
-    thisURL = "localhost"
-    run(host=thisURL, port=8080)
+    # thisURL = "localhost"
+    # run(host=thisURL, port=8080)
 
     # AWS Version
     # -------------
-    # thisURL = "http://169.254.169.254/latest/meta-data/public-hostname"
-    # publicURL = urlopen(thisURL).read()
-    # HOSTNAME = socket.gethostname()
-    # run(host=HOSTNAME, port=8080)
+    thisURL = "http://169.254.169.254/latest/meta-data/public-hostname"
+    publicURL = urlopen(thisURL).read()
+    HOSTNAME = socket.gethostname()
+    run(host=HOSTNAME, port=8080)
