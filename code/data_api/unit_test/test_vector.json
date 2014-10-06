@@ -4,11 +4,18 @@
   },
   {  "keyword": "retail sales",
      "location": "Washington, DC",
-     "context": [{"question":"Can you use devices like scanners?","answer": 1}]
+     "context": [{"question":"Can you use devices like scanners?","answer": 0}]
   },
   {  "keyword": "retail sales",
      "location": "Washington, DC",
-     "context": [{"question":"Can you use devices like scanners?","answer": 1}, 
-                      {"question":"Can you stand for long periods of time, and lift up to 40 pounds?","answer":1}]
+     "context": [{"question":"Can you use devices like scanners?","answer": 0}, 
+                 {"question":"Can you work with a team to serve customers well?","answer":1}]
+  },
+  {  "keyword": "retail sales",
+     "location": "Washington, DC",
+     "context": [{"question":"Can you use devices like scanners?","answer": 0}, 
+                 {"question":"Can you work with a team to serve customers well?","answer":1},
+		 {"question": "Can you do maintenance tasks like setting up displays and cleaning the store?","answer":1}]
   }
+
 ]
