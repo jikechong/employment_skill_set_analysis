@@ -1,0 +1,14 @@
+[{  "keyword": "retail sales",
+     "location": null,
+     "context": null
+  },
+  {  "keyword": "retail sales",
+     "location": null,
+     "context": [{"question":"Can you use devices like scanners?","answer": 1}]
+  },
+  {  "keyword": "retail sales",
+     "location": null,
+     "context": [{"question":"Can you use devices like scanners?","answer": 1}, 
+                      {"question":"Can you stand for long periods of time, and lift up to 40 pounds?","answer":1}]
+  }
+]
