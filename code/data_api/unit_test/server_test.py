@@ -2,7 +2,7 @@ import json
 import urllib2
 import requests
 
-url = 'http://localhost:8080/post'
+url = 'http://174.129.34.133:8080/post'
 
 
 def main():
