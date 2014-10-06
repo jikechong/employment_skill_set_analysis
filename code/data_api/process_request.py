@@ -173,8 +173,8 @@ class process_request:
         # - Yes/No list implicitly passed as class state
         n_jobs, jobs = self.check_job_market(onet, keyword, location_clean)
         
-        if n_jobs < 100:
-            response = self.generate_response_in_context(keyword, location, jobs=jobs)
+        if n_jobs < 30:
+            response = self.generate_response_in_context(keyword, location, n_jobs=n_jobs, jobs=jobs)
             if LOGLEVEL >= LOG_ALL_MESSAGE:
                 print "\nINFO: only %s jobs found, return %s"%(n_jobs,response)
             return response
@@ -183,7 +183,7 @@ class process_request:
         
         # Check for end of tree
         if curr_cluster == '-2':
-            response = self.generate_response_in_context(keyword, location, jobs=jobs)
+            response = self.generate_response_in_context(keyword, location, n_jobs=n_jobs, jobs=jobs)
             if LOGLEVEL >= LOG_ALL_MESSAGE:
                 print "\nINFO: Leaf node %s found, return %s"%(curr_node,response)
             return response
@@ -206,7 +206,7 @@ class process_request:
 
             # Ask the question as response
             # - Yes/No list implicitly passed as class state                                                                                                                                             
-            response = self.generate_response_in_context(keyword, location, question = curr_question)
+            response = self.generate_response_in_context(keyword, location, n_jobs=n_jobs, question = curr_question)
 
             if LOGLEVEL >= LOG_ALL_MESSAGE:
                 print "\nINFO: Found next question to ask [%s]"%curr_question
@@ -221,7 +221,7 @@ class process_request:
         if str(curr_choice) == '1':
             self.yes_list.append(element)
             curr_node = str(self.trees[onet][curr_node]["right_child"])
-        elif str(choice) == '0':
+        elif str(curr_choice) == '0':
             self.no_list.append(element)
             curr_node =str(self.trees[onet][curr_node]["left_child"])
         
@@ -244,7 +244,7 @@ class process_request:
 
         for element in self.no_list:
             ele_clean = self.clean_string(element["query"]) 
-            req = req+'+AND+NOT'+ele_clean
+            req = req+'+AND+NOT+'+ele_clean
         
         req = req+'/l-'+location_clean
         req = req+'?pshid='+self.SHXML_pshid
@@ -275,10 +275,14 @@ class process_request:
 
     
     # Ask the question as response
-    def generate_response_in_context(self, keyword, location, question="", jobs=[]):
+    def generate_response_in_context(self, keyword, location, n_jobs=-1, question="", jobs=[]):
 
         # Build Response
         response = {"keyword":keyword, "location":location, "context":[]}
+        
+        # n_jobs reporting
+        if n_jobs != -1:
+            response["n_jobs"] = n_jobs
 
         # Include "Yes" context
         for element in self.yes_list:
